@@ -1,0 +1,37 @@
+# ---- binarios compilados (se regeneran con `make`) ----
+RISCV-SoC/soc_tb
+RISCV-SoC/soc_tb_simple
+RISCV-SoC/axpy_soc_tb
+RISCV-SoC-TLM/riscv_soc_sim
+RISCV-SoC-TLM/axpy_soc_tlm
+
+# ---- artefactos de Vitis HLS / Vivado ----
+RISCV-SoC/riscv_soc_proj/
+RISCV-SoC/power_work/
+RISCV-SoC/.gen/
+RISCV-SoC/.srcs/
+RISCV-SoC/.Xil/
+RISCV-SoC/*.log
+RISCV-SoC/*.jou
+RISCV-SoC/*.rpt
+RISCV-SoC/*.dcp
+RISCV-SoC/*.dat
+vivado*.log
+vivado*.jou
+*.str
+clockInfo.txt
+.Xil/
+
+# checkpoints pesados (se regeneran); los reportes .rpt de reports/ SÍ se versionan
+RISCV-SoC/reports/*.dcp
+
+# ---- bare-metal compilado (se regenera con baremetal/build.sh) ----
+RISCV-SoC/baremetal/*.o
+RISCV-SoC/baremetal/*.elf
+RISCV-SoC/baremetal/*.bin
+RISCV-SoC/baremetal/*.map
+
+# ---- varios ----
+*.o
+*.out
+/tmp/
