@@ -1,32 +1,15 @@
 #ifndef AXI_INTERCONNECT_H
 #define AXI_INTERCONNECT_H
 
-// =====================================================================
-// AXI INTERCONNECT + ARBITRO (bloque naranja del diagrama del SoC).
+// AXI interconnect + arbitro. Los dos maestros -- LSU escalar y VLSU
+// vectorial -- comparten el unico puerto de la memoria de datos: el arbitro
+// concede un acceso por ciclo con prioridad commit > VLSU > LSU (el perdedor
+// reintenta al siguiente). Por eso la VLSU mueve un elemento por ciclo.
 //
-// Modela el punto donde los DOS maestros del SoC -- la LSU del core
-// escalar y la VLSU del coprocesador vectorial -- comparten el camino a
-// la memoria de datos de la FPGA. La memoria tiene UN puerto de datos:
-// el arbitro concede UN acceso por ciclo, con prioridad fija
-//
-//     commit (stores en retiro)  >  VLSU  >  LSU escalar
-//
-// asi que un load escalar y un load vectorial en el mismo ciclo se
-// serializan de verdad: el perdedor lo reintenta al ciclo siguiente.
-// Por el mismo motivo la VLSU mueve UN ELEMENTO POR CICLO -- que es
-// exactamente como se comporta un puerto de memoria arbitrado real, y
-// no la version magica de 16 accesos simultaneos.
-//
-// El plano de CONTROL del SoC si es AXI de verdad: el top exporta un
-// esclavo AXI4-Lite (s_axilite, ver soc_top.cpp) por el que el PS del
-// Kria arranca el core y lee su estado. La memoria de instrucciones NO
-// pasa por aqui: es una BRAM local del frontend (I-TCM), como muestra
-// el diagrama (solo backend y coprocesador van al interconnect).
-//
-// Los helpers dmem_load/dmem_store hacen el acceso con los anchos de
-// RV32I (byte/half/word); el desplazamiento dentro de la palabra vive
-// aqui porque la memoria es por palabras.
-// =====================================================================
+// El plano de control es AXI4-Lite (s_axilite, ver soc_top.cpp): el PS del Kria
+// arranca el core y lee su estado. La IMEM no pasa por aqui (es BRAM local del
+// frontend). dmem_load/dmem_store acceden por byte/half/word sobre la memoria,
+// que es por palabras.
 #include "soc_top.h"
 #include "rv32i_defs.h"
 #include "soc_state.h"

@@ -27,15 +27,10 @@ static const int VSLDU_LAT = 2; // permutaciones (slide/gather/compress)
 
 // ---- RVV: opcodes/campos verificados contra la especificacion oficial
 // (RISC-V "V" Vector Extension v1.0), mismos valores que rv32_vector.cpp.
-// No se agregan a rv32i_defs.h a proposito (ese header es compartido con
-// rv32_core.cpp/rv32_vector.cpp, no hace falta tocarlo). ----
-// Periferico UART mapeado en memoria: cualquier store a esta direccion
-// imprime el byte bajo por la consola del simulador. Es lo minimo que
-// necesita un runtime C para tener salida (putchar/printf).
-// Region MMIO alta, deliberadamente FUERA del rango de dmem (64KB); misma
-// direccion que memory_map::UART_BASE en la pista TLM, para que ambas
-// pistas ejecuten EXACTAMENTE los mismos binarios para
-// no colisionar con el binario ni con sus datos.
+// UART mapeado en memoria: un store a esta direccion imprime el byte bajo
+// por consola (lo minimo para putchar/printf). MMIO alto, fuera del rango de
+// dmem y en la misma direccion que en la pista TLM, para correr los mismos
+// binarios.
 static const uint32_t UART_TX_ADDR = 0x20000000;
 
 #endif // SOC_CONFIG_H
