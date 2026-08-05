@@ -35,3 +35,4 @@ RISCV-SoC/baremetal/*.map
 *.o
 *.out
 /tmp/
+RISCV-SoC/cong/

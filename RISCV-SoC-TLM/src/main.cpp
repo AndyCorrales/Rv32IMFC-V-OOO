@@ -22,23 +22,11 @@
 #include "full_elf.h"    // UART + interrupcion de timer + modos M/U
 #include "printf_elf.h"  // printf de la biblioteca C (newlib)
 
-// =====================================================================
-// TESTBENCH UNICO del core RV32IMFC + RVV + OOO (pista TLM).
-//
-// Corre cuatro suites en secuencia sobre la MISMA topologia TLM
-// (ProcessorOOO -> Bus -> {Memory, Uart}), reseteando el core y la
-// memoria entre cada una:
-//
-//   A. ISA + RVV  -- programa ensamblado a mano (I+M+F+C y RVV Fases 1-3)
-//   B. Excepciones-- ELF real: handler en mtvec, ECALL, MRET, continua
-//   C. Sistema    -- ELF real: UART, interrupcion de timer y U-mode
-//   D. printf     -- ELF real enlazado contra newlib
-//
-// A diferencia de la pista HLS, aca el UART es un PERIFERICO TLM de
-// verdad colgado del Bus: el procesador solo emite un store y es el Bus
-// quien decodifica la direccion y lo rutea, sin saber que del otro lado
-// hay algo distinto de una memoria.
-// =====================================================================
+// testbench del core rv32imfc + rvv + ooo (pista tlm). corre cuatro suites en
+// secuencia sobre la misma topologia (ProcessorOOO -> Bus -> {Memory, Uart}),
+// reseteando entre cada una:
+//   A. isa + rvv (programa a mano)   B. excepciones (elf: mtvec/ecall/mret)
+//   C. sistema (elf: uart/timer/u-mode)   D. printf (elf con newlib)
 
 using namespace rv32c;
 namespace F3A = rv32i::Funct3_ALU;

@@ -1,15 +1,13 @@
 #ifndef SOC_CSR_H
 #define SOC_CSR_H
 
-// Banco de CSRs de modo maquina: lectura y escritura. Es el punto unico
-// por el que pasa todo acceso a estado privilegiado, lo que mantiene el
-// orden de programa (las instrucciones CSR ejecutan en la cabeza del ROB).
+// banco de csrs de modo maquina (lectura/escritura). punto unico de acceso a
+// estado privilegiado; las instrucciones csr ejecutan en la cabeza del rob.
 #include "soc_top.h"
 #include "rv32i_defs.h"
 #include "soc_state.h"
 
-// almacenamiento simple. Una direccion no soportada lee 0 / ignora la
-// escritura (comportamiento aceptable para un core bare-metal minimo).
+// almacenamiento simple; una direccion no soportada lee 0 / ignora la escritura.
 static ap_uint<32> read_csr(ap_uint<12> addr) {
     switch (addr.to_uint()) {
         case rv32i::CSR::MSTATUS:  return csr_mstatus;

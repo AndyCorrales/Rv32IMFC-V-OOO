@@ -1,34 +1,13 @@
 #ifndef VECTOR_COPROCESSOR_H
 #define VECTOR_COPROCESSOR_H
 
-// =====================================================================
-// COPROCESADOR VECTORIAL (bloque derecho del diagrama del SoC).
-//
-//   Vector Instruction Queue (VIQ)  ->  Unidades funcionales
-//        FIFO de 4 entradas             VALU / VMUL / VSLDU / VLSU
-//
-// El core escalar DESPACHA la instruccion vectorial a la VIQ (con su
-// vl/vstart/sew capturados y su tag del ROB) y sigue: no espera a que
-// el coprocesador termine. Ese es el desacople del diagrama -- hasta 4
-// vectoriales en vuelo mientras el escalar avanza. El ROB comun es lo
-// que mantiene el retiro en orden y los traps precisos.
-//
-// Dentro del coprocesador la ejecucion es EN ORDEN (una instruccion en
-// ejecucion a la vez, sacada de la cabeza de la VIQ) y se rutea a una
-// de cuatro unidades:
-//   VALU  (lat 2): aritmetica/logica, comparaciones, mascaras,
-//                  reducciones, widening/narrowing
-//   VMUL  (lat 4): multiplicacion y division vectorial (tambien las
-//                  formas widening vwmul*/vwmacc*)
-//   VSLDU (lat 2): permutaciones -- slides, gather, compress
-//   VLSU        : loads/stores vectoriales; ejecuta SOLO en la cabeza
-//                 del ROB (memoria en orden) y accede a traves del
-//                 arbitro del interconnect (ver axi_interconnect.h)
-//
-// El coprocesador NO ejecuta especulativamente: vregs no esta
-// renombrado, asi que el dispatch retiene vectoriales mientras haya un
-// branch en vuelo (branch_pending != 0, ver frontend_dispatch.h).
-// =====================================================================
+// coprocesador vectorial: VIQ (fifo 4) -> unidades VALU/VMUL/VSLDU/VLSU.
+// el escalar despacha la vectorial a la viq (con vl/vstart/sew y su tag) y
+// sigue: hasta 4 en vuelo mientras avanza; el rob comun retira en orden.
+// dentro del coproc la ejecucion es en orden, ruteada por unidad:
+//   valu (lat 2) aritmetica/mascaras/reduce/widening; vmul (lat 4) mul/div;
+//   vsldu (lat 2) permutaciones; vlsu loads/stores por el arbitro (en la cabeza del rob).
+// no especula (vregs sin renombrar): retiene vectoriales si hay branch en vuelo.
 #include "soc_top.h"
 #include "soc_state.h"
 #include "exec_vector.h"

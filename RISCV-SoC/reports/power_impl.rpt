@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Tue Aug  4 09:20:28 2026
+| Date             : Wed Aug  5 00:45:32 2026
 | Host             : andy-ThinkPad-P53 running 64-bit Ubuntu 24.04.4 LTS
 | Command          : report_power -file /media/andy/9cf23886-b985-4f84-a422-2da06e76f300/home/byovsh/Documents/Vscode/Proyecto/version_final_martes/RISCV-SoC/reports/power_impl.rpt
 | Design           : riscv_soc_tick
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.392        |
+| Total On-Chip Power (W)  | 0.406        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.104        |
+| Dynamic (W)              | 0.117        |
 | Device Static (W)        | 0.289        |
 | Effective TJA (C/W)      | 2.3          |
 | Max Ambient (C)          | 84.1         |
@@ -53,20 +53,20 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.025 |        3 |       --- |             --- |
-| CLB Logic                |     0.034 |    42965 |       --- |             --- |
-|   LUT as Logic           |     0.029 |    21482 |    117120 |           18.34 |
-|   CARRY8                 |     0.002 |      676 |     14640 |            4.62 |
-|   Register               |     0.002 |    14687 |    234240 |            6.27 |
+| CLB Logic                |     0.038 |    43356 |       --- |             --- |
+|   LUT as Logic           |     0.032 |    21612 |    117120 |           18.45 |
+|   CARRY8                 |     0.002 |      675 |     14640 |            4.61 |
+|   Register               |     0.002 |    14947 |    234240 |            6.38 |
 |   LUT as Distributed RAM |     0.001 |      192 |     57600 |            0.33 |
 |   LUT as Shift Register  |    <0.001 |      216 |     57600 |            0.38 |
 |   Others                 |     0.000 |     1216 |       --- |             --- |
-|   F7/F8 Muxes            |     0.000 |      140 |    117120 |            0.12 |
+|   F7/F8 Muxes            |     0.000 |      116 |    117120 |            0.10 |
 |   BUFG                   |     0.000 |        1 |        32 |            3.13 |
-| Signals                  |     0.029 |    33743 |       --- |             --- |
-| Block RAM                |     0.008 |     10.5 |       144 |            7.29 |
-| DSPs                     |     0.008 |       39 |      1248 |            3.13 |
+| Signals                  |     0.034 |    34140 |       --- |             --- |
+| Block RAM                |     0.010 |     10.5 |       144 |            7.29 |
+| DSPs                     |     0.010 |       39 |      1248 |            3.13 |
 | Static Power             |     0.289 |          |           |                 |
-| Total                    |     0.392 |          |           |                 |
+| Total                    |     0.406 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,9 +76,9 @@ Table of Contents
 +-----------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source          | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint          |       0.720 |     0.209 |       0.141 |      0.068 |       NA    | Unspecified | NA         |
+| Vccint          |       0.720 |     0.227 |       0.159 |      0.068 |       NA    | Unspecified | NA         |
 | Vccint_io       |       0.850 |     0.035 |       0.000 |      0.035 |       NA    | Unspecified | NA         |
-| Vccbram         |       0.850 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram         |       0.850 |     0.004 |       0.003 |      0.001 |       NA    | Unspecified | NA         |
 | Vccaux          |       1.800 |     0.077 |       0.000 |      0.077 |       NA    | Unspecified | NA         |
 | Vccaux_io       |       1.800 |     0.031 |       0.000 |      0.031 |       NA    | Unspecified | NA         |
 | Vcco33          |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -163,44 +163,46 @@ Table of Contents
 +--------------------------------------------------------------+-----------+
 | Name                                                         | Power (W) |
 +--------------------------------------------------------------+-----------+
-| riscv_soc_tick                                               |     0.104 |
-|   fregs_U                                                    |     0.001 |
+| riscv_soc_tick                                               |     0.117 |
+|   fregs_U                                                    |     0.002 |
 |   grp_fpu_compute_fu_7131                                    |     0.021 |
 |     faddfsub_32ns_32ns_32_4_full_dsp_1_U83                   |     0.003 |
 |       riscv_soc_tick_faddfsub_32ns_32ns_32_4_full_dsp_1_ip_u |     0.003 |
-|     fdiv_32ns_32ns_32_9_no_dsp_1_U85                         |     0.009 |
-|       riscv_soc_tick_fdiv_32ns_32ns_32_9_no_dsp_1_ip_u       |     0.009 |
+|     fdiv_32ns_32ns_32_9_no_dsp_1_U85                         |     0.008 |
+|       riscv_soc_tick_fdiv_32ns_32ns_32_9_no_dsp_1_ip_u       |     0.008 |
 |     fmul_32ns_32ns_32_3_max_dsp_1_U84                        |     0.002 |
-|       riscv_soc_tick_fmul_32ns_32ns_32_3_max_dsp_1_ip_u      |     0.001 |
+|       riscv_soc_tick_fmul_32ns_32ns_32_3_max_dsp_1_ip_u      |     0.002 |
 |     fsqrt_32ns_32ns_32_8_no_dsp_1_U92                        |     0.005 |
 |       riscv_soc_tick_fsqrt_32ns_32ns_32_8_no_dsp_1_ip_u      |     0.005 |
-|   grp_read_operand_fu_7192                                   |     0.002 |
+|   grp_read_operand_fu_7192                                   |     0.004 |
 |   grp_tage_fold_fu_7229                                      |     0.002 |
 |   grp_tage_fold_fu_7238                                      |     0.002 |
 |   grp_tage_fold_fu_7247                                      |     0.002 |
-|   grp_vec_arith_compute_fu_7156                              |     0.031 |
-|     grp_vec_alu_fu_1206                                      |     0.009 |
+|   grp_tage_fold_fu_7265                                      |     0.001 |
+|   grp_vec_arith_compute_fu_7156                              |     0.033 |
+|     grp_vec_alu_fu_1206                                      |     0.011 |
 |       sdiv_32s_32s_32_36_seq_1_U227                          |     0.002 |
-|       srem_32s_32s_32_36_seq_1_U225                          |     0.001 |
+|       srem_32s_32s_32_36_seq_1_U225                          |     0.002 |
 |       udiv_32s_32s_32_36_seq_1_U228                          |     0.001 |
-|       urem_32s_32s_32_36_seq_1_U226                          |     0.001 |
+|       urem_32s_32s_32_36_seq_1_U226                          |     0.002 |
 |     grp_vec_narrow_alu_fu_1256                               |     0.004 |
-|     grp_vreg_get_1_fu_1156                                   |     0.001 |
-|   mul_32ns_32ns_64_1_1_U509                                  |     0.002 |
+|     grp_vec_wide_alu_fu_1280                                 |     0.001 |
+|       mul_32s_32s_32_1_1_U262                                |     0.001 |
+|     grp_vreg_get_1_fu_1156                                   |     0.002 |
+|   mul_32ns_32ns_64_1_1_U509                                  |     0.003 |
 |   mul_32ns_32s_64_1_1_U510                                   |     0.002 |
-|   mul_32s_32s_64_1_1_U512                                    |     0.002 |
+|   mul_32s_32s_64_1_1_U512                                    |     0.003 |
 |   regfile_U                                                  |     0.001 |
-|   rob_value_U                                                |     0.003 |
+|   rob_value_U                                                |     0.004 |
 |   sdiv_32s_32s_32_36_seq_1_U517                              |     0.001 |
 |     riscv_soc_tick_sdiv_32s_32s_32_36_seq_1_divseq_u         |     0.001 |
-|   srem_32s_32s_32_36_seq_1_U515                              |     0.002 |
+|   srem_32s_32s_32_36_seq_1_U515                              |     0.001 |
 |     riscv_soc_tick_srem_32s_32s_32_36_seq_1_divseq_u         |     0.001 |
-|   tage_t_tag_U                                               |     0.001 |
-|   udiv_32s_32s_32_36_seq_1_U516                              |     0.003 |
+|   udiv_32s_32s_32_36_seq_1_U516                              |     0.004 |
 |     riscv_soc_tick_udiv_32s_32s_32_36_seq_1_divseq_u         |     0.001 |
 |   urem_32s_32s_32_36_seq_1_U518                              |     0.001 |
 |     riscv_soc_tick_urem_32s_32s_32_36_seq_1_divseq_u         |     0.001 |
-|   vregs_U                                                    |     0.001 |
+|   vregs_U                                                    |     0.002 |
 +--------------------------------------------------------------+-----------+
 
 

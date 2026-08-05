@@ -8,15 +8,10 @@
 
 #include "memory_map.h"
 
-// UART mapeado en memoria: TARGET TLM-2.0 colgado del Bus, igual que la
-// Memory. Una escritura a su rango imprime el byte bajo por la consola;
-// una lectura devuelve un registro de estado con "listo para transmitir".
-//
-// A diferencia de la pista HLS —donde el UART es un caso especial dentro
-// del camino de store del core— acá es un periférico de verdad: el Bus
-// decodifica la dirección y rutea la transacción, sin que el procesador
-// sepa que del otro lado hay algo distinto de una memoria. Esa es
-// justamente la ventaja de haber modelado un Bus con mapa de direcciones.
+// uart mapeado en memoria: target tlm-2.0 colgado del bus. una escritura imprime
+// el byte bajo por consola; una lectura devuelve el registro de estado. es un
+// periferico de verdad: el bus decodifica la direccion y rutea, el core no sabe
+// que del otro lado no hay una memoria.
 SC_MODULE(Uart) {
     tlm_utils::simple_target_socket<Uart, 32> socket;
 

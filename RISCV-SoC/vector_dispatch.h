@@ -1,23 +1,10 @@
 #ifndef VECTOR_DISPATCH_H
 #define VECTOR_DISPATCH_H
 
-// =====================================================================
-// DISPATCH de las instrucciones con opcode OP-V (0b1010111).
-//
-// Cubre las dos familias que comparten ese opcode:
-//   - vsetvli / vsetivli / vsetvl  (funct3 = 111), que se resuelven en el
-//     propio dispatch porque fijan vtype/vl para todo lo que sigue;
-//   - la aritmetica vectorial completa, despachada por categoria
-//     (VCAT_*): ALU, comparaciones, merge, logica de mascaras, unary,
-//     reducciones, permutaciones y los grupos EMUL=2 de widening y
-//     narrowing.
-//
-// Vive aparte porque OP-V NO colisiona con ningun otro opcode, asi que
-// puede resolverse antes que el resto de la cadena sin alterar el orden.
-// Ojo: los load/store vectoriales NO estan aca -- comparten los opcodes
-// LOAD-FP/STORE-FP con FLW/FSW y su orden relativo si importa, por eso
-// siguen en dispatch.h.
-// =====================================================================
+// dispatch del opcode OP-V (0b1010111): vsetvli/vsetivli/vsetvl (se resuelven
+// aca porque fijan vtype/vl) y toda la aritmetica vectorial por categoria
+// (vcat_*). los load/store vectoriales NO estan aca: comparten opcode con
+// flw/fsw y su orden importa, asi que van en el dispatch principal.
 #include "soc_top.h"
 #include "rv32i_defs.h"
 #include "soc_state.h"

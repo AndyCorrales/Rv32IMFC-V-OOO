@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date              : Tue Aug  4 09:20:23 2026
+| Date              : Wed Aug  5 00:45:26 2026
 | Host              : andy-ThinkPad-P53 running 64-bit Ubuntu 24.04.4 LTS
 | Command           : report_timing_summary -file /media/andy/9cf23886-b985-4f84-a422-2da06e76f300/home/byovsh/Documents/Vscode/Proyecto/version_final_martes/RISCV-SoC/reports/timing_impl.rpt
 | Design            : riscv_soc_tick
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      0.481        0.000                      0                28787        0.046        0.000                      0                28787        4.238        0.000                       0                 15191  
+      0.523        0.000                      0                29425        0.052        0.000                      0                29425        4.238        0.000                       0                 15451  
 
 
 All user specified timing constraints are met.
@@ -162,7 +162,7 @@ ap_clk  {0.000 5.000}      10.000          100.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-ap_clk              0.481        0.000                      0                28787        0.046        0.000                      0                28787        4.238        0.000                       0                 15191  
+ap_clk              0.523        0.000                      0                29425        0.052        0.000                      0                29425        4.238        0.000                       0                 15451  
 
 
 ------------------------------------------------------------------------------------------------
@@ -193,26 +193,26 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  ap_clk
   To Clock:  ap_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack        0.481ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.046ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack        0.523ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.052ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        4.238ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.481ns  (required time - arrival time)
-  Source:                 grp_vec_arith_compute_fu_7156/b_22_reg_413_reg[28]/C
+Slack (MET) :             0.523ns  (required time - arrival time)
+  Source:                 grp_vec_arith_compute_fu_7156/ap_CS_fsm_reg[768]/C
                             (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/agg_result_3_reg_132_reg[30]/D
+  Destination:            grp_vec_arith_compute_fu_7156/reg_1773_reg[29]/D
                             (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             ap_clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
-  Data Path Delay:        9.518ns  (logic 4.951ns (52.018%)  route 4.567ns (47.982%))
-  Logic Levels:           21  (CARRY8=3 DSP_A_B_DATA=1 DSP_ALU=2 DSP_M_DATA=1 DSP_MULTIPLIER=1 DSP_OUTPUT=2 DSP_PREADD_DATA=1 LUT2=1 LUT5=3 LUT6=6)
-  Clock Path Skew:        -0.010ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    0.031ns = ( 10.031 - 10.000 ) 
+  Data Path Delay:        9.473ns  (logic 3.868ns (40.831%)  route 5.605ns (59.169%))
+  Logic Levels:           18  (CARRY8=2 DSP_A_B_DATA=2 DSP_ALU=1 DSP_M_DATA=1 DSP_MULTIPLIER=1 DSP_OUTPUT=1 DSP_PREADD_DATA=1 LUT2=2 LUT5=1 LUT6=6)
+  Clock Path Skew:        -0.012ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.029ns = ( 10.029 - 10.000 ) 
     Source Clock Delay      (SCD):    0.041ns
     Clock Pessimism Removal (CPR):    0.000ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
@@ -225,91 +225,82 @@ Slack (MET) :             0.481ns  (required time - arrival time)
   -------------------------------------------------------------------    -------------------
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=15352, unset)        0.041     0.041    grp_vec_arith_compute_fu_7156/ap_clk
-    SLICE_X50Y111        FDRE                                         r  grp_vec_arith_compute_fu_7156/b_22_reg_413_reg[28]/C
+                         net (fo=15612, unset)        0.041     0.041    grp_vec_arith_compute_fu_7156/ap_clk
+    SLICE_X44Y220        FDRE                                         r  grp_vec_arith_compute_fu_7156/ap_CS_fsm_reg[768]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X50Y111        FDRE (Prop_DFF_SLICEL_C_Q)
-                                                      0.114     0.155 f  grp_vec_arith_compute_fu_7156/b_22_reg_413_reg[28]/Q
-                         net (fo=3, routed)           0.619     0.774    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/tmp_product_i_45_1[15]
-    SLICE_X48Y107        LUT6 (Prop_G6LUT_SLICEL_I1_O)
-                                                      0.226     1.000 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/tmp_product_i_120/O
-                         net (fo=1, routed)           0.173     1.173    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/tmp_product_i_120_n_5
-    SLICE_X48Y104        LUT5 (Prop_A6LUT_SLICEL_I2_O)
-                                                      0.188     1.361 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/tmp_product_i_53/O
-                         net (fo=3, routed)           0.548     1.909    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/ap_CS_fsm_reg[563]_12
-    SLICE_X49Y92         LUT6 (Prop_D6LUT_SLICEL_I5_O)
-                                                      0.152     2.061 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/urem_32s_32s_32_36_seq_1_U226/tmp_product_i_5/O
-                         net (fo=26, routed)          0.776     2.836    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/B[11]
-    DSP48E2_X11Y35       DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_B[11]_B2_DATA[11])
-                                                      0.216     3.052 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_A_B_DATA_INST/B2_DATA[11]
-                         net (fo=1, routed)           0.000     3.052    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_A_B_DATA.B2_DATA<11>
-    DSP48E2_X11Y35       DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_B2_DATA[11]_B2B1[11])
-                                                      0.097     3.149 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_PREADD_DATA_INST/B2B1[11]
-                         net (fo=1, routed)           0.000     3.149    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_PREADD_DATA.B2B1<11>
-    DSP48E2_X11Y35       DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_B2B1[11]_U[41])
-                                                      0.773     3.922 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_MULTIPLIER_INST/U[41]
-                         net (fo=1, routed)           0.000     3.922    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_MULTIPLIER.U<41>
-    DSP48E2_X11Y35       DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_U[41]_U_DATA[41])
-                                                      0.067     3.989 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_M_DATA_INST/U_DATA[41]
-                         net (fo=1, routed)           0.000     3.989    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_M_DATA.U_DATA<41>
-    DSP48E2_X11Y35       DSP_ALU (Prop_DSP_ALU_DSP48E2_U_DATA[41]_ALU_OUT[47])
-                                                      0.727     4.716 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_ALU_INST/ALU_OUT[47]
-                         net (fo=1, routed)           0.000     4.716    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_ALU.ALU_OUT<47>
-    DSP48E2_X11Y35       DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[47]_PCOUT[47])
-                                                      0.167     4.883 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product/DSP_OUTPUT_INST/PCOUT[47]
-                         net (fo=1, routed)           0.073     4.956    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__0/PCIN[47]
-    DSP48E2_X11Y36       DSP_ALU (Prop_DSP_ALU_DSP48E2_PCIN[47]_ALU_OUT[6])
-                                                      0.739     5.695 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__0/DSP_ALU_INST/ALU_OUT[6]
-                         net (fo=1, routed)           0.000     5.695    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__0/DSP_ALU.ALU_OUT<6>
-    DSP48E2_X11Y36       DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[6]_P[6])
-                                                      0.146     5.841 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__0/DSP_OUTPUT_INST/P[6]
-                         net (fo=1, routed)           0.477     6.318    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__0_n_104
-    SLICE_X40Y83         LUT2 (Prop_A6LUT_SLICEM_I1_O)
-                                                      0.138     6.456 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__2_i_8__0/O
-                         net (fo=1, routed)           0.017     6.473    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__2_i_8__0_n_5
-    SLICE_X40Y83         CARRY8 (Prop_CARRY8_SLICEM_S[0]_CO[7])
-                                                      0.281     6.754 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__2/CO[7]
-                         net (fo=1, routed)           0.030     6.784    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__2_n_5
-    SLICE_X40Y84         CARRY8 (Prop_CARRY8_SLICEM_CI_CO[7])
-                                                      0.065     6.849 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__3/CO[7]
-                         net (fo=1, routed)           0.030     6.879    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__3_n_5
-    SLICE_X40Y85         CARRY8 (Prop_CARRY8_SLICEM_CI_O[6])
-                                                      0.157     7.036 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product_carry__4/O[6]
-                         net (fo=2, routed)           0.330     7.366    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/tmp_product__3__0[62]
-    SLICE_X43Y80         LUT5 (Prop_B6LUT_SLICEM_I2_O)
-                                                      0.152     7.518 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32ns_32ns_64_1_1_U219/agg_result_3_reg_132[22]_i_22/O
-                         net (fo=2, routed)           0.581     8.099    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32s_32ns_64_1_1_U220/agg_result_3_reg_132[30]_i_14_0
-    SLICE_X50Y76         LUT5 (Prop_E6LUT_SLICEL_I2_O)
-                                                      0.187     8.286 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32s_32ns_64_1_1_U220/agg_result_3_reg_132[30]_i_24/O
-                         net (fo=1, routed)           0.097     8.383    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32s_32ns_64_1_1_U220/agg_result_3_reg_132[30]_i_24_n_5
-    SLICE_X50Y76         LUT6 (Prop_G6LUT_SLICEL_I0_O)
-                                                      0.137     8.520 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/mul_32s_32ns_64_1_1_U220/agg_result_3_reg_132[30]_i_14/O
-                         net (fo=1, routed)           0.434     8.954    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/srem_32s_32s_32_36_seq_1_U225/agg_result_3_reg_132[30]_i_4_1
-    SLICE_X55Y74         LUT6 (Prop_C6LUT_SLICEL_I5_O)
-                                                      0.081     9.035 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/srem_32s_32s_32_36_seq_1_U225/agg_result_3_reg_132[30]_i_9/O
-                         net (fo=1, routed)           0.244     9.279    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/srem_32s_32s_32_36_seq_1_U225/agg_result_3_reg_132[30]_i_9_n_5
-    SLICE_X58Y74         LUT6 (Prop_G6LUT_SLICEM_I5_O)
-                                                      0.057     9.336 f  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/srem_32s_32s_32_36_seq_1_U225/agg_result_3_reg_132[30]_i_4/O
-                         net (fo=1, routed)           0.059     9.395    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/udiv_32s_32s_32_36_seq_1_U228/agg_result_3_reg_132_reg[30]_4
-    SLICE_X58Y74         LUT6 (Prop_H6LUT_SLICEM_I4_O)
-                                                      0.084     9.479 r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/udiv_32s_32s_32_36_seq_1_U228/agg_result_3_reg_132[30]_i_1/O
-                         net (fo=1, routed)           0.080     9.559    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/udiv_32s_32s_32_36_seq_1_U228_n_6
-    SLICE_X58Y74         FDRE                                         r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/agg_result_3_reg_132_reg[30]/D
+    SLICE_X44Y220        FDRE (Prop_DFF2_SLICEL_C_Q)
+                                                      0.115     0.156 r  grp_vec_arith_compute_fu_7156/ap_CS_fsm_reg[768]/Q
+                         net (fo=66, routed)          0.937     1.093    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773_reg[31][8]
+    SLICE_X49Y199        LUT2 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.058     1.151 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[31]_i_10/O
+                         net (fo=1, routed)           0.101     1.252    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[31]_i_10_n_5
+    SLICE_X49Y200        LUT6 (Prop_A6LUT_SLICEL_I5_O)
+                                                      0.137     1.389 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[31]_i_4/O
+                         net (fo=92, routed)          0.761     2.150    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/ap_CS_fsm_reg[848]
+    SLICE_X38Y197        LUT6 (Prop_C6LUT_SLICEM_I0_O)
+                                                      0.056     2.206 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_i_257/O
+                         net (fo=1, routed)           0.257     2.463    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_i_257_n_5
+    SLICE_X39Y199        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.082     2.545 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_i_99/O
+                         net (fo=10, routed)          0.834     3.379    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/ap_CS_fsm_reg[888]_1
+    SLICE_X52Y207        LUT6 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.083     3.462 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__0_i_9__1/O
+                         net (fo=1, routed)           0.302     3.764    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__0/A[8]
+    DSP48E2_X12Y83       DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_A[8]_ACOUT[8])
+                                                      0.512     4.276 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__0/DSP_A_B_DATA_INST/ACOUT[8]
+                         net (fo=1, routed)           0.986     5.262    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/ACIN[8]
+    DSP48E2_X12Y84       DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_ACIN[8]_A2_DATA[8])
+                                                      0.371     5.633 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_A_B_DATA_INST/A2_DATA[8]
+                         net (fo=1, routed)           0.000     5.633    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_A_B_DATA.A2_DATA<8>
+    DSP48E2_X12Y84       DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_A2_DATA[8]_A2A1[8])
+                                                      0.114     5.747 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_PREADD_DATA_INST/A2A1[8]
+                         net (fo=1, routed)           0.000     5.747    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_PREADD_DATA.A2A1<8>
+    DSP48E2_X12Y84       DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_A2A1[8]_V[8])
+                                                      0.699     6.446 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_MULTIPLIER_INST/V[8]
+                         net (fo=1, routed)           0.000     6.446    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_MULTIPLIER.V<8>
+    DSP48E2_X12Y84       DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_V[8]_V_DATA[8])
+                                                      0.065     6.511 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_M_DATA_INST/V_DATA[8]
+                         net (fo=1, routed)           0.000     6.511    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_M_DATA.V_DATA<8>
+    DSP48E2_X12Y84       DSP_ALU (Prop_DSP_ALU_DSP48E2_V_DATA[8]_ALU_OUT[8])
+                                                      0.722     7.233 f  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_ALU_INST/ALU_OUT[8]
+                         net (fo=1, routed)           0.000     7.233    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_ALU.ALU_OUT<8>
+    DSP48E2_X12Y84       DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[8]_P[8])
+                                                      0.146     7.379 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1/DSP_OUTPUT_INST/P[8]
+                         net (fo=2, routed)           0.314     7.693    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__1_n_102
+    SLICE_X53Y208        LUT2 (Prop_B6LUT_SLICEM_I0_O)
+                                                      0.057     7.750 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_carry__0_i_7__3/O
+                         net (fo=1, routed)           0.022     7.772    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_carry__0_i_7__3_n_5
+    SLICE_X53Y208        CARRY8 (Prop_CARRY8_SLICEM_S[1]_O[2])
+                                                      0.179     7.951 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product_carry__0/O[2]
+                         net (fo=2, routed)           0.274     8.225    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/tmp_product__3__0[26]
+    SLICE_X52Y206        LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.056     8.281 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[31]_i_60/O
+                         net (fo=1, routed)           0.015     8.296    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[31]_i_60_n_5
+    SLICE_X52Y206        CARRY8 (Prop_CARRY8_SLICEL_S[2]_O[5])
+                                                      0.278     8.574 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773_reg[31]_i_37/O[5]
+                         net (fo=1, routed)           0.688     9.262    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773_reg[31]_i_37_n_15
+    SLICE_X48Y209        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.056     9.318 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[29]_i_2/O
+                         net (fo=1, routed)           0.048     9.366    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[29]_i_2_n_5
+    SLICE_X48Y209        LUT5 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.082     9.448 r  grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280/mul_32s_32s_32_1_1_U262/reg_1773[29]_i_1/O
+                         net (fo=1, routed)           0.066     9.514    grp_vec_arith_compute_fu_7156/grp_vec_wide_alu_fu_1280_ap_return[29]
+    SLICE_X48Y209        FDRE                                         r  grp_vec_arith_compute_fu_7156/reg_1773_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock ap_clk rise edge)    10.000    10.000 r  
                                                       0.000    10.000 r  ap_clk (IN)
-                         net (fo=15352, unset)        0.031    10.031    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/ap_clk
-    SLICE_X58Y74         FDRE                                         r  grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/agg_result_3_reg_132_reg[30]/C
-                         clock pessimism              0.000    10.031    
-                         clock uncertainty           -0.035     9.996    
-    SLICE_X58Y74         FDRE (Setup_HFF_SLICEM_C_D)
-                                                      0.044    10.040    grp_vec_arith_compute_fu_7156/grp_vec_alu_fu_1206/agg_result_3_reg_132_reg[30]
+                         net (fo=15612, unset)        0.029    10.029    grp_vec_arith_compute_fu_7156/ap_clk
+    SLICE_X48Y209        FDRE                                         r  grp_vec_arith_compute_fu_7156/reg_1773_reg[29]/C
+                         clock pessimism              0.000    10.029    
+                         clock uncertainty           -0.035     9.994    
+    SLICE_X48Y209        FDRE (Setup_GFF_SLICEL_C_D)
+                                                      0.044    10.038    grp_vec_arith_compute_fu_7156/reg_1773_reg[29]
   -------------------------------------------------------------------
-                         required time                         10.040    
-                         arrival time                          -9.559    
+                         required time                         10.038    
+                         arrival time                          -9.514    
   -------------------------------------------------------------------
-                         slack                                  0.481    
+                         slack                                  0.523    
 
 
 
@@ -317,15 +308,15 @@ Slack (MET) :             0.481ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.046ns  (arrival time - required time)
-  Source:                 empty_reg_4267_reg[16]/C
+Slack (MET) :             0.052ns  (arrival time - required time)
+  Source:                 empty_reg_4267_reg[25]/C
                             (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
-  Destination:            rob_br_target_U/ram_reg_0_7_16_16/SP/I
+  Destination:            rob_br_target_U/ram_reg_0_7_25_25/SP/I
                             (rising edge-triggered cell RAMS32 clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             ap_clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (ap_clk rise@0.000ns - ap_clk rise@0.000ns)
-  Data Path Delay:        0.150ns  (logic 0.083ns (55.333%)  route 0.067ns (44.667%))
+  Data Path Delay:        0.150ns  (logic 0.086ns (57.333%)  route 0.064ns (42.667%))
   Logic Levels:           0  
   Clock Path Skew:        0.043ns (DCD - SCD - CPR)
     Destination Clock Delay (DCD):    0.057ns
@@ -336,27 +327,27 @@ Slack (MET) :             0.046ns  (arrival time - required time)
   -------------------------------------------------------------------    -------------------
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=15352, unset)        0.014     0.014    ap_clk
-    SLICE_X25Y110        FDRE                                         r  empty_reg_4267_reg[16]/C
+                         net (fo=15612, unset)        0.014     0.014    ap_clk
+    SLICE_X26Y166        FDRE                                         r  empty_reg_4267_reg[25]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X25Y110        FDRE (Prop_HFF_SLICEM_C_Q)
-                                                      0.083     0.097 r  empty_reg_4267_reg[16]/Q
-                         net (fo=1, routed)           0.067     0.164    rob_br_target_U/ram_reg_0_7_16_16/D
-    SLICE_X24Y110        RAMS32                                       r  rob_br_target_U/ram_reg_0_7_16_16/SP/I
+    SLICE_X26Y166        FDRE (Prop_DFF2_SLICEL_C_Q)
+                                                      0.086     0.100 r  empty_reg_4267_reg[25]/Q
+                         net (fo=1, routed)           0.064     0.164    rob_br_target_U/ram_reg_0_7_25_25/D
+    SLICE_X25Y167        RAMS32                                       r  rob_br_target_U/ram_reg_0_7_25_25/SP/I
   -------------------------------------------------------------------    -------------------
 
                          (clock ap_clk rise edge)     0.000     0.000 r  
                                                       0.000     0.000 r  ap_clk (IN)
-                         net (fo=15352, unset)        0.057     0.057    rob_br_target_U/ram_reg_0_7_16_16/WCLK
-    SLICE_X24Y110        RAMS32                                       r  rob_br_target_U/ram_reg_0_7_16_16/SP/CLK
+                         net (fo=15612, unset)        0.057     0.057    rob_br_target_U/ram_reg_0_7_25_25/WCLK
+    SLICE_X25Y167        RAMS32                                       r  rob_br_target_U/ram_reg_0_7_25_25/SP/CLK
                          clock pessimism              0.000     0.057    
-    SLICE_X24Y110        RAMS32 (Hold_E5LUT_SLICEM_CLK_I)
-                                                      0.061     0.118    rob_br_target_U/ram_reg_0_7_16_16/SP
+    SLICE_X25Y167        RAMS32 (Hold_H5LUT_SLICEM_CLK_I)
+                                                      0.055     0.112    rob_br_target_U/ram_reg_0_7_25_25/SP
   -------------------------------------------------------------------
-                         required time                         -0.118    
+                         required time                         -0.112    
                          arrival time                           0.164    
   -------------------------------------------------------------------
-                         slack                                  0.046    
+                         slack                                  0.052    
 
 
 
@@ -369,10 +360,10 @@ Waveform(ns):       { 0.000 5.000 }
 Period(ns):         10.000
 Sources:            { ap_clk }
 
-Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location      Pin
-Min Period        n/a     RAMB18E2/CLKARDCLK  n/a            1.960         10.000      8.040      RAMB18_X0Y24  frat_has_tag_U/ram_reg_bram_0/CLKARDCLK
-Low Pulse Width   Slow    SRLC32E/CLK         n/a            0.762         5.000       4.238      SLICE_X25Y95  ap_CS_fsm_reg[123]_srl32___grp_vec_arith_compute_fu_7156_ap_CS_fsm_reg_r_30/CLK
-High Pulse Width  Slow    SRLC32E/CLK         n/a            0.762         5.000       4.238      SLICE_X25Y95  ap_CS_fsm_reg[123]_srl32___grp_vec_arith_compute_fu_7156_ap_CS_fsm_reg_r_30/CLK
+Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location       Pin
+Min Period        n/a     RAMB18E2/CLKARDCLK  n/a            1.960         10.000      8.040      RAMB18_X1Y46   frat_has_tag_U/ram_reg_bram_0/CLKARDCLK
+Low Pulse Width   Slow    SRLC32E/CLK         n/a            0.762         5.000       4.238      SLICE_X24Y137  ap_CS_fsm_reg[123]_srl32___grp_vec_arith_compute_fu_7156_ap_CS_fsm_reg_r_30/CLK
+High Pulse Width  Slow    SRLC32E/CLK         n/a            0.762         5.000       4.238      SLICE_X24Y137  ap_CS_fsm_reg[123]_srl32___grp_vec_arith_compute_fu_7156_ap_CS_fsm_reg_r_30/CLK
 
 
 

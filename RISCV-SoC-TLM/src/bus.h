@@ -8,11 +8,9 @@
 
 #include "memory_map.h"
 
-// Bus TLM-2.0. Actua como TARGET hacia cada initiator del sistema (CPU,
-// VectorUnit, ...) y como INITIATOR hacia cada periferico (Memory, ...).
-// decode() rutea por rango de direccion GLOBAL, sin importar quien inicio
-// la transaccion: por eso agregar un segundo initiator (cpu_target ->
-// vector_target) no requiere tocar la logica de decode().
+// bus tlm-2.0: target hacia cada initiator (cpu, vector) e initiator hacia cada
+// periferico (memory, uart). decode() rutea por direccion global, sin importar
+// quien inicio la transaccion.
 SC_MODULE(Bus) {
     // Targets: uno por cada initiator que puede generar trafico en el bus.
     tlm_utils::simple_target_socket<Bus, 32> cpu_target;

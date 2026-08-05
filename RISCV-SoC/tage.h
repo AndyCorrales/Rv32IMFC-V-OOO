@@ -1,33 +1,15 @@
 #ifndef TAGE_H
 #define TAGE_H
 
-// =====================================================================
-// TAGE: el predictor de saltos del FRONTEND (bloque "TAGE" del diagrama).
-//
-// TAGE = TAgged GEometric history length predictor (Seznec/Michaud,
-// 2006). La idea: varios predictores en paralelo, cada uno indexado con
-// una longitud DISTINTA de historia global (longitudes en progresion
-// geometrica), mas un predictor base sin historia. Gana la tabla con
-// match de tag que use la historia mas larga: los saltos que se
-// correlacionan lejos usan historia larga, los triviales no gastan mas
-// que el bimodal.
-//
-// Esta version es un TAGE reducido y sintetizable:
-//   BASE  : bimodal, 512 contadores de 2 bits, indexado solo por pc
-//   T1/2/3: 128 entradas {tag 8b, ctr 3b con signo, u 2b},
-//           historias de 4 / 8 / 16 bits (geometrica x2)
-//   GHR   : 16 bits de historia global (1 bit por branch condicional)
-//
-// Integracion con el pipeline (ver frontend_dispatch.h y soc_top.cpp):
-//   - PREDICT en el dispatch del branch: decide el camino del fetch.
-//   - La entrada del ROB guarda pred_taken y un SNAPSHOT del GHR.
-//   - UPDATE en el COMMIT del branch, con el resultado real. Como el
-//     commit es en orden, el predictor entrena con la verdad y en orden
-//     de programa -- sin updates especulativos que luego haya que
-//     deshacer.
-//   - En un MISPREDICT el commit restaura GHR = snapshot|real y hace
-//     pipeline_flush(): el mismo camino barato de los traps.
-// =====================================================================
+// tage: predictor de saltos del frontend (seznec/michaud). varios predictores
+// en paralelo, cada uno con una longitud distinta de historia global; gana el
+// que tenga match de tag con la historia mas larga.
+//   base  : bimodal, 512 contadores 2b (indexado por pc)
+//   t1/2/3: 128 entradas {tag 8b, ctr 3b, u 2b}, historias 4/8/16
+//   ghr   : 16 bits de historia global
+// predict en el dispatch del branch; update en el commit (en orden, con la
+// verdad). un mispredict restaura el ghr y hace pipeline_flush (el mismo
+// camino barato de los traps).
 #include "soc_top.h"
 
 // ---- parametros ----

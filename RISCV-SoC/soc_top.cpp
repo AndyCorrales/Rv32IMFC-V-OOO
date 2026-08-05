@@ -1,19 +1,7 @@
-// =====================================================================
-// Core RV32IMFC + RVV out-of-order (Tomasulo) -- EL TICK.
-//
-// Este archivo contiene UNICAMENTE el lazo principal: las cuatro etapas
-// del pipeline. Todo lo demas vive en headers, incluidos aca para formar
-// una sola unidad de traduccion (el estado es `static`, asi que partirlo
-// en varios .cpp le daria a cada uno su propia copia del ROB):
-//
-//   ooo_config.h    parametros (latencias, tamanos)
-//   rvv_encoding.h  codificacion RVV 1.0 verificada contra la spec
-//   ooo_state.h     structs y registros del procesador
-//   ooo_csr.h       banco de CSRs
-//   exec_scalar.h   CDB, operandos, ALU, mul/div, FPU, branch
-//   exec_vector.h   banco vectorial y ALU vectorial (incl. EMUL=2)
-//   exec_mem.h      acceso a la memoria de datos
-// =====================================================================
+// core rv32imfc + rvv fuera de orden (tomasulo): el tick.
+// aca vive solo el lazo principal (las 4 etapas del pipeline); el resto en
+// headers, incluidos aca para una sola unidad de traduccion (el estado es
+// static, partirlo daria a cada .cpp su propia copia del rob).
 #include "soc_config.h"
 #include "rvv_encoding.h"
 #include "soc_state.h"

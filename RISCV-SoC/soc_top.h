@@ -3,27 +3,16 @@
 
 #include <ap_int.h>
 
-// Core RV32IMFC fuera de orden (Tomasulo), sintetizable con Vitis HLS.
-//
-//   - Fetch de 16 bits: expande comprimidas (C) en cualquier alineacion par.
-//   - Renombrado con RAT (enteros) y FRAT (flotantes) sobre un ROB unificado
-//     de 8 entradas -> las dependencias int<->float usan el mismo mecanismo
-//     de tags que una entera.
-//   - Unidades con reservation station propia: 2x ALU, MUL/DIV, FPU (ext. F
-//     completa, incluye familia FMADD R4), LSU, BR y una unidad vectorial VEC.
-//   - CDB: al completar, cada unidad difunde (tag, valor) y despierta las RS
-//     que esperaban ese tag. Los valores F viajan como bits IEEE-754 crudos.
-//   - Coprocesamiento vectorial RVV integrado al mismo flujo OOO: una vectorial
-//     ejecuta mientras instrucciones escalares independientes completan
-//     alrededor. Una sola RS VEC serializa las vectoriales entre si (sin VRAT);
-//     vle/vse se resuelven en la cabeza del ROB.
-//
-// Alcance (ver LIMITACIONES.md): RVV Zve32x, SEW=32 / LMUL=1 / VLEN=128
-// (VLMAX=4); rm=RNE fijo. Fin de programa: halfword 0x0000 con el ROB vacio.
-//
-// Un tick = un ciclo de reloj; el estado vive en variables static. Las salidas
-// de dispatch/completion/commit dejan al testbench reconstruir el estado solo
-// desde el retiro (sin backdoor). vregs_out expone el banco vectorial.
+// core rv32imfc fuera de orden (tomasulo), sintetizable en vitis hls.
+// fetch de 16b (expande las comprimidas C). renombrado rat/frat sobre un rob
+// unico de 8, asi que las dependencias int<->float usan los mismos tags.
+// unidades con su reservation station: 2x alu, mul/div, fpu, lsu, br y la vec.
+// el cdb difunde (tag, valor) al terminar y despierta las rs que lo esperaban.
+// la rvv va integrada al mismo flujo ooo: la vectorial corre mientras el escalar
+// avanza. una sola rs vec las serializa entre si (sin vrat), vle/vse en la cabeza del rob.
+// alcance (ver LIMITACIONES.md): rvv zve32x, sew32/lmul1/vlen128, rm=rne fijo.
+// un tick = un ciclo, el estado vive en static. las salidas dispatch/commit dejan
+// al tb reconstruir todo desde el retiro, sin backdoor. vregs_out saca el banco vec.
 
 // Memorias de instrucciones y datos: 16384 palabras = 64 KB cada una
 // (dimensionadas para un binario con el printf de newlib).

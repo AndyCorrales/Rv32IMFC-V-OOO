@@ -1,10 +1,9 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-// Unidades de ejecucion ESCALARES y la red de bypass: el CDB, la lectura
-// de operandos (con renombrado), la ALU entera, mul/div y la FPU, mas la
-// condicion de salto. Son funciones puras salvo cdb_broadcast, que es
-// justamente la que despierta a las estaciones de reserva.
+// unidades de ejecucion escalares + bypass: cdb, lectura de operandos (con
+// rename), alu, mul/div, fpu y la condicion de salto. funciones puras salvo
+// cdb_broadcast, que despierta las estaciones de reserva.
 #include "soc_top.h"
 #include "rv32i_defs.h"
 #include "soc_state.h"
@@ -16,10 +15,8 @@ using namespace rv32_hls;
 
 // ================= helpers combinacionales =================
 
-// Despierta a toda RS que esperara `tag` -- el rol del CDB. Se llama una
-// vez por cada unidad que completa en el tick (bus de resultado por
-// unidad, sin arbitraje de un CDB unico -- simplificacion documentada en
-// rv32_ooo.h).
+// despierta a toda rs que esperaba `tag` (el rol del cdb). se llama una vez por
+// unidad que completa en el tick (bus de resultado por unidad).
 static void cdb_broadcast(ap_uint<3> tag, ap_uint<32> value) {
     for (int i = 0; i < N_ALU; i++) {
 #pragma HLS UNROLL

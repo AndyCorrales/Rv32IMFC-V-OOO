@@ -1,19 +1,10 @@
 #ifndef FRONTEND_DISPATCH_H
 #define FRONTEND_DISPATCH_H
 
-// =====================================================================
-// DECODIFICADOR Y DISPATCH (etapa 4 del pipeline).
-//
-// Una sola instruccion por ciclo, en orden de programa. Decide a que
-// estacion de reserva va, lee sus operandos (renombrados) y reserva la
-// entrada del ROB. Devuelve `true` si la instruccion pudo despacharse;
-// `false` significa stall estructural (la unidad que necesita esta
-// ocupada) y el fetch la reintenta el ciclo siguiente.
-//
-// Esta separado del tick porque es, con diferencia, la parte mas grande
-// y la que mas crece al agregar instrucciones: aca vive TODA la tabla de
-// decodificacion de RV32IMFC + RVV.
-// =====================================================================
+// decode + dispatch (una instruccion por ciclo, en orden). decide la rs, lee
+// operandos renombrados y reserva la entrada del rob. devuelve false si hay
+// stall estructural (la unidad esta ocupada) y el fetch reintenta. aca vive
+// toda la tabla de decodificacion de rv32imfc + rvv.
 #include "soc_top.h"
 #include "rv32i_defs.h"
 #include "soc_state.h"

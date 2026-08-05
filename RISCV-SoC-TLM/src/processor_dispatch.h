@@ -1,18 +1,10 @@
 #ifndef PROCESSOR_DISPATCH_H
 #define PROCESSOR_DISPATCH_H
 
-// =====================================================================
-// DECODIFICADOR Y DISPATCH (etapa 4) de ProcessorOOO.
-//
-// Una instruccion por ciclo, en orden de programa: decide a que estacion
-// de reserva va, lee sus operandos (renombrados) y reserva la entrada del
-// ROB. Aca vive TODA la tabla de decodificacion de RV32IMFC + RVV, que es
-// la parte que mas crece al agregar instrucciones.
-//
-// El ORDEN de la cadena de if/else importa: las vectoriales de memoria
-// deben comprobarse ANTES que FLW/FSW, porque comparten los opcodes
-// LOAD-FP y STORE-FP y solo las distingue el campo `width`.
-// =====================================================================
+// decode + dispatch (una instruccion por ciclo, en orden): decide la rs, lee
+// operandos renombrados y reserva la entrada del rob. aca vive toda la tabla
+// de decodificacion rv32imfc + rvv. ojo con el orden del if/else: las
+// vectoriales de memoria van antes que flw/fsw (comparten opcode, las distingue width).
 #include "processor_ooo.h"
 
 inline void ProcessorOOO::dispatch(uint32_t instr, uint8_t isize) {
