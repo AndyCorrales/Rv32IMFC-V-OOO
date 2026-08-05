@@ -129,7 +129,7 @@ g++ -std=c++14 -I. -I$XILINX_VITIS/include -o soc soc_top.cpp soc_tb.cpp && ./so
 vitis_hls -f run_hls.tcl
 ```
 
-## Limitaciones honestas (para la defensa)
+## Limitaciones honestas 
 
 - **Issue queue** = estaciones de reserva distribuidas (Tomasulo), no
   una cola unificada — mismo concepto, otra organización; el README lo
